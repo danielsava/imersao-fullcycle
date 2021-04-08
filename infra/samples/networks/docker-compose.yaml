@@ -1,0 +1,48 @@
+#
+#
+#    Here’s an example Compose file defining two custom networks. 
+#    The 'proxy' service is isolated from the 'db' service, 
+#    because they do not share a network in common - only app can talk to both.
+#
+#    Fonte:
+#        - https://docs.docker.com/compose/networking/
+#
+#
+
+# Adicionar descrição a chave
+# app: > 
+#    asdfadsfasd
+
+version: "3.9"
+
+services:
+  proxy:
+    build: ./proxy
+    networks:
+      - frontend
+  app:
+    build: ./app
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres
+    networks:
+      - backend
+
+networks:
+  frontend:
+    # Use a custom driver
+    name: frontend_rede
+    driver: custom-driver-1
+  backend:
+    # Use a custom driver which takes special options
+    name: backend_rede
+    driver: custom-driver-2
+    driver_opts:
+    foo: "1"
+    bar: "2"      
+  defaults:
+    # Para usar redes externas existentes
+    external:
+        name: my-pre-existing-network 

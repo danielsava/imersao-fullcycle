@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./initdb/:/docker-entrypoint-initdb.d
+      #- ./dbdata:/data/db
+    environment:
+      #- COMPOSE_PROJECT_NAME=imersao
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=nest

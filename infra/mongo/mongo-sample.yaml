@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb-example
+    # command: --serviceExecutor adaptive // Configurações do MongoDB que normalmente são passadas para o daemon 'mongod' 
+    restart: always
+    ports:
+      - "27017:27017"
+    #deploy:
+     #- replicas: 1
+    #networks:
+      #- teste
+
+#networks:
+  #teste:
+  #new:
+  #legacy:
