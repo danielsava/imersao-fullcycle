@@ -3,6 +3,8 @@
 
 Plataforma do curso: https://imersao.fullcycle.com.br/
 
+Data: 05/04/2021
+
 ## Sobre o repositório
 Esse repositório contém todo código utilizado durante as aulas para referência.
 
