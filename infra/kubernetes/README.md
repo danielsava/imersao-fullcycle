@@ -82,3 +82,44 @@ Para configurar o `kubectl` para ter acesso ao cluster k8s, em `Kubernetes Clust
 
     # 
     $ kubectl get nodes
+
+<br>
+
+## GCP K8S: Deploy Simulador
+
+
+Foi gerada uma `nova imagem` do simulador com as configurações do arquivo `Dockerfile.prod` e com as configurações do `Kafka Client` do `Cluster Kafka` criado no cloud da `ConfluentInc`.
+
+Dentro do diretório `simulador-go/simulator`:
+
+    # Build
+    $ docker build -t danielsava/imersao-fc-simulador-go:latest -f Dockerfile.prod .
+
+    # Push
+    $ docker push danielsava/imersao-fc-simulador-go:latest
+
+
+<br>
+
+
+Criada a imagem com as novas configurações e feito pus, dentro do diretório `kubernetes/simulador`, e com `kubectl` configurado e funcionado com o cluster kuberntes na GCP:
+
+    # Config
+    $ kubectl apply -f configmap.yaml 
+    $ kubectl get configmap
+    $ kubectl describe configmap simulator-conf
+
+
+    # Deploy 
+    $ kubectl apply -f deploy.yaml
+    $ kubectl get deploy // (ou deployment)
+    $ kubectl describe deploy simulator
+
+    # Logs 
+    $ kubectl get pods
+    $ kubectl logs -f <nome_pod>
+
+    # Deletar
+    kubectl delete -f <nome_arquivo>.yaml
+    kubectl delete configmap <nome_config_map>  // nome obtido através do 'kubectl get configmap'
+    kubectl delete deploy <nome_deploy>         // nome obtido através do 'kubectl get deploy'

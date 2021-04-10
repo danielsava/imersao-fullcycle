@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simulador-go-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simulador-go
+  template:
+    metadata:
+      labels:
+        app: simulador-go
+    spec:
+      containers:
+        - name: simulador-go
+          image: danielsava/imersao-fc-simulador-go:latest
+          volumeMounts:
+            - name: simulador-go-volume
+              mountPath: /go/src/.env
+              subPath: .env
+
+      volumes:
+        - name: simulador-go-volume
+          configMap:
+            name: simulador-go-config
+            items:
+              - key: env
+                path: .env
+
