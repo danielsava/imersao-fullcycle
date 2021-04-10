@@ -66,4 +66,14 @@ services:
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
 
+  kafka-topics-generator:
+    image: confluentinc/cp-kafka:6.1.1
+    depends_on:
+      - broker
+    command: >
+      bash -c
+        "sleep 10s &&
+        kafka-topics --create --topic=route.new-direction --if-not-exists --bootstrap-server=broker:29092 &&
+        kafka-topics --create --topic=route.new-position --if-not-exists --bootstrap-server=broker:29092"
+
 
