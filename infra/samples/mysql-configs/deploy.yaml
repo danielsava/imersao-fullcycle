@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-1618180052
+  namespace: default
+  labels:
+    app: mysql-1618180052
+    app.kubernetes.io/managed-by: Helm
+    chart: mysql-1.6.9
+    heritage: Helm
+    release: mysql-1618180052
+spec:
+  replicas: 1
+  #progressDeadlineSeconds: 600
+  #revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mysql-1618180052
+      release: mysql-1618180052
+  #strategy:
+    #type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-1618180052
+        release: mysql-1618180052
+    spec:
+      containers:
+        name: mysql-1618180052
+        image: mysql:5.7.30
+        imagePullPolicy: IfNotPresent
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql-root-password
+              name: mysql-1618180052
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql-password
+              name: mysql-1618180052
+              optional: true
+        - name: MYSQL_USER
+        - name: MYSQL_DATABASE
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        ports:
+        - containerPort: 3306
+          name: mysql
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: data
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - rm
+        - -fr
+        - /var/lib/mysql/lost+found
+        image: busybox:1.32
+        imagePullPolicy: IfNotPresent
+        name: remove-lost-found
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: data
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mysql-1618180052

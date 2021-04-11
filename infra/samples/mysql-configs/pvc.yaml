@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-1618180052
+  namespace: default
+  labels:
+    app: mysql-1618180052
+    release: mysql-1618180052
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  #storageClassName: standard
+  #volumeMode: Filesystem
+  #volumeName: pvc-b6f73da1-4fc5-4485-992d-cbd0532c995f
+status:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 8Gi
+  phase: Bound

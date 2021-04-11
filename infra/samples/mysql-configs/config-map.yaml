@@ -1,0 +1,15 @@
+
+# Não faz nada. Apenas testes
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-1618180052-test
+  namespace: default
+  labels:
+    app: mysql-1618180052
+    app.kubernetes.io/managed-by: Helm
+    chart: mysql-1.6.9
+    heritage: Helm
+    release: mysql-1618180052
+data:
+  run.sh: ""
