@@ -17,8 +17,8 @@ spec:
           image: danielsava/imersao-fc-simulador-go:latest
           volumeMounts:
             - name: simulador-go-volume
-              mountPath: /go/src/.env
-              subPath: .env
+              mountPath: /go/src/.env         # Caminho/path dentro do CONTAINER
+              subPath: .env                   # Caminho/path dentro do VOLUME
 
       volumes:
         - name: simulador-go-volume
