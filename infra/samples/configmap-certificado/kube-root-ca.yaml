@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+name: kube-root-ca.crt
+namespace: default
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDKjCCAhKgAwIBAgIQZCenJOS3LITO.ORGMAkA9jANBgkqhkiG9w0BAQsFADAv
+    MS0wKwYDVQQDEyRlYzRkODkxNC0yZWY1LTRhNjEtYjVhNC00OGE3ODVlNzcxZjQw
+    HhcNMjEwNDA5MTYzOTQ0WhcNMjYwNDA4MTczOTQ0WjAvMS0wKwYDVQQDEyRlYzRk
+    ODkxNC0yZWY1LTRhNjEadsfad2345sdfaDVlNzcxZjQwggEiMA0GCSqGSIb3DQEB
+    AQUAA4IBDwAwggEKAoIBAQDI8XfH3KjTP0tT65/c4r50ZKWmaKGjLgjJWy00V7TI
+    hYCUgWfhkc2soWI2vo0QOaDJQiZlvMhSDeTK7n2MTe+aW9v0oIi1+H/wdKUtWtjY
+    aH6zy2FXedmbfZ4iWPTcyUu4dqgaHSL95TzXM35YBvhNZlaHmziZvuEt9FIb8Dz+
+    BCj0cAzl/2+eKa+9T1eWsuNWX757vxCHeGli9Xss+8sJZljdu/FqN/CG2mn1Uy4x
+    /D2LxOXbaf8HyNPBMb/jydIR350MvjuRPJSjgUkK9fmk5nAO1jpu2yHvrSrpfhvL
+    Trqr+8WWaHz0WYi4ApPdUzxONtfAizp7C0b7DisaZ59ZAgMBAAGjQjBAMA4GA1Ud
+    DwEB09809qw8e0rq97r\zxczxc\098098c-d\zxGA1UdDgQWBBTMRqaS/ME03l6c
+    drYuGk6/GpnHqjANBgkqhkiG9w0BAQsFAAOCAQEAfIYCAMx8g5A/zgO8m1feDVHq
+    HejVjA0G6B0oGzmccNIwWIO6ZkP5u2sYxRxXaDix+VClnbRJxvknvq58pu9z6bxj
+    Eqjc0PSmdUEVvrGm2x7rpbmv4Wp1Feua2OcpXc7CsIg9gjbUAKsI6r38DD63eB26
+    uEJYmUox1/sdmPZJKkdFsa0mOBtvTmV1Xzb7pTdAwwCV4TG3wFK7UdfyUVt9WVG1
+    Sxevm6KKyeMu1651651650as6dfasdfa-8-0234579807098NSYN7Wm7pSZPeJe3
+    P2b1YHDyCpqRKDk+wTROUXA.COM>ikU9iGukjHG15Eg7Eeg==
+    -----END CERTIFICATE-----
+
+  

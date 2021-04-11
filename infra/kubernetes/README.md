@@ -134,3 +134,8 @@ Criada a imagem com as novas configurações e feito pus, dentro do diretório `
 
     # Sair do Container 
     $ exit
+
+
+    # Para visualizar o conteudo do arquivo de configuração
+    $ kubectl get <resource> <nome_resource> -o yaml
+    $ kubectl get configmaps game-config -o yaml    // exemplo

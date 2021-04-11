@@ -19,6 +19,8 @@ spec:
             - name: simulador-go-volume
               mountPath: /go/src/.env         # Caminho/path dentro do CONTAINER
               subPath: .env                   # Caminho/path dentro do VOLUME
+                                              #   Em resumo: esse ´volumeMonts´ monta o arquivo '.env', criado pelo ´configMap´  
+                                              #              e mapeado pelo volume ´simulador-go-volume´.
 
       volumes:
         - name: simulador-go-volume
