@@ -115,11 +115,22 @@ Criada a imagem com as novas configurações e feito pus, dentro do diretório `
     $ kubectl get deploy // (ou deployment)
     $ kubectl describe deploy simulator
 
-    # Logs 
-    $ kubectl get pods
-    $ kubectl logs -f <nome_pod>
+    # Logs: 
+    $ kubectl get pods                  
+    $ kubectl logs -f <nome_pod>                // logs do pod
+
+    $ kubectl logs -f deploymet/<nome_deploy>   // logs do deployment: visualiza de todos os pods  
 
     # Deletar
-    kubectl delete -f <nome_arquivo>.yaml
-    kubectl delete configmap <nome_config_map>  // nome obtido através do 'kubectl get configmap'
-    kubectl delete deploy <nome_deploy>         // nome obtido através do 'kubectl get deploy'
+    $ kubectl delete -f <nome_arquivo>.yaml
+    $ kubectl delete configmap <nome_config_map>  // nome obtido através do 'kubectl get configmap'
+    $ kubectl delete deploy <nome_deploy>         // nome obtido através do 'kubectl get deploy'
+
+
+    # Executar Shell 
+    $ kubectl exec --stdin --tty <nome_pod> -- /bin/bash
+    # Ou
+    $ kubectl exec -it <nome_pod> -- /bin/bash   // '-it' é a abreviação de '--stdin' e '--tty'
+
+    # Sair do Container 
+    $ exit
