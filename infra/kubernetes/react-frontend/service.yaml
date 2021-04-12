@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-frontend-service
+spec:
+  # type: LoadBalancer # Rodou a GCP que possui suporte para loadbalancer
+  selector:
+    app: react-frontend
+  ports:
+  - port: 80
+

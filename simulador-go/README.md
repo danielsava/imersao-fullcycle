@@ -55,9 +55,6 @@ Para `compilar`, dentro do mesmo diretório acima:
 Irá gerar um arquivo executável dentro do diretório de acordo com o Sistema Operacional local.
 
 
-
-
-
 Referência:
 
  - https://golang.org/doc/tutorial/getting-started

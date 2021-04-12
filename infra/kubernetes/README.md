@@ -85,7 +85,7 @@ Para configurar o `kubectl` para ter acesso ao cluster k8s, em `Kubernetes Clust
 
 <br>
 
-## GCP K8S: Deploy Simulador
+## Simulador: Build, Push e Deploy no K8S GCP
 
 
 Foi gerada uma `nova imagem` do simulador com as configurações do arquivo `Dockerfile.prod` e com as configurações do `Kafka Client` do `Cluster Kafka` criado no cloud da `ConfluentInc`.
