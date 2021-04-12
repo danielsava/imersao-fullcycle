@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nest-api-service
+spec:
+  # type: LoadBalancer # Rodou a GCP que possui suporte para loadbalancer
+  selector:
+    app: nest-api
+  ports:
+  - port: 3000
+

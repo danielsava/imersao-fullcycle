@@ -18,6 +18,12 @@ import { RoutesGateway } from './routes.gateway';
             client: {
               clientId: process.env.KAFKA_CLIENT_ID,
               brokers: [process.env.KAFKA_BROKER],
+              ssl: true,  // Alteração aula kubernetes Wesley. Do ´true' pra frente
+              sasl: {
+                mechanism: 'plain', // scram-sha-256 ou scram-sha-512
+                username: process.env.KAFKA_SASL_USERNAME,
+                password: process.env.KAFKA_SASL_PASSWORD
+              }
             },
             consumer: {
               groupId:

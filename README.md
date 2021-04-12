@@ -3,6 +3,11 @@
 
 Plataforma do curso: https://imersao.fullcycle.com.br/
 
+Repositórios:
+    -  https://github.com/codeedu/imersao-fsfc2
+    -  https://github.com/danielsava/imersao-fullcycle/blob/main/README.md
+
+
 Data: 05/04/2021
 
 ## Sobre o repositório

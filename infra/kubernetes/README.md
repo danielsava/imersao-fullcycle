@@ -98,9 +98,7 @@ Dentro do diretório `simulador-go/simulator`:
     # Push
     $ docker push danielsava/imersao-fc-simulador-go:latest
 
-
 <br>
-
 
 Criada a imagem com as novas configurações e feito pus, dentro do diretório `kubernetes/simulador`, e com `kubectl` configurado e funcionado com o cluster kuberntes na GCP:
 
@@ -119,7 +117,7 @@ Criada a imagem com as novas configurações e feito pus, dentro do diretório `
     $ kubectl get pods                  
     $ kubectl logs -f <nome_pod>                // logs do pod
 
-    $ kubectl logs -f deploymet/<nome_deploy>   // logs do deployment: visualiza de todos os pods  
+    $ kubectl logs -f deployment/<nome_deploy>   // logs do deployment: visualiza de todos os pods  
 
     # Deletar
     $ kubectl delete -f <nome_arquivo>.yaml
@@ -139,3 +137,71 @@ Criada a imagem com as novas configurações e feito pus, dentro do diretório `
     # Para visualizar o conteudo do arquivo de configuração
     $ kubectl get <resource> <nome_resource> -o yaml
     $ kubectl get configmaps game-config -o yaml    // exemplo
+
+<br>
+
+## Helm: instalação do MongoDB no K8s na GCP
+
+Para instalar o MongoDB no clustes k8s, foi utilizado o gerenciador `Helm`. Para instalação foi seguido as instruções do [site oficial](https://helm.sh/docs/intro/quickstart/)
+
+Das opções, foi escolhida a instalação pelo `Chocolatey`
+
+
+     # Instalação
+     $ choco install kubernetes-helm
+
+     # Repositorio config
+     $ helm repo add stable https://charts.helm.sh/stable
+
+     # Instalação exemplo, MYSQL
+     $ helm repo update
+     $ helm install stable/mysql --generate-name
+
+
+     # Para obter senha do root
+     $ MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1618180052 -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
+
+     # Ou (mais fácil)
+     kubectl get secret <nome_secret_mysql> -o yaml
+
+<br>
+
+### Instalação do Mongo com Helm
+
+Com o `Helm` instalado e configurado, foi instalado o MongoDB. Foi instalado o pacote da Bitnami, e portanto seguindo as instruções de instalação do [site oficial](https://bitnami.com/stack/mongodb/helm):
+
+     
+     # Instalação do Repo
+     $ helm repo add bitnami https://charts.bitnami.com/bitnami
+
+     # Instalação do Mongo, com configurações de user, senha e collection
+     $ helm install mongodb bitnami/mongodb --set=auth.username="root",auth.rootPassword="root",auth.database="nest" 
+
+<br>
+
+Segue abaixo as instruções do Helm para utilização do Mongo:
+
+    MongoDB(R) can be accessed on the following DNS name(s) and ports from within your cluster:
+
+    mongodb.default.svc.cluster.local
+
+    To get the root password run:
+
+    export MONGODB_ROOT_PASSWORD=$(kubectl get secret --namespace default mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
+
+    To connect to your database, create a MongoDB(R) client container:
+
+    kubectl run --namespace default mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.5-debian-10-r0 --command -- bash
+
+    Then, run the following command:
+    mongo admin --host "mongodb" --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD
+
+    To connect to your database from outside the cluster execute the following commands:
+
+    kubectl port-forward --namespace default svc/mongodb 27017:27017 &
+    mongo --host 127.0.0.1 --authenticationDatabase admin -p $MONGODB_ROOT_PASSWORD
+
+
+<br>
+
+## Nest API : configurações do MongoDB

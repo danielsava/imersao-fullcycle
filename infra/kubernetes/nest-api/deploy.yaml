@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nest-api-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nest-api
+  template:
+    metadata:
+      labels:
+        app: nest-api
+    spec:
+      containers:
+        - name: nest-api
+          image: wesleywillians/imersao2-backend
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: nest-api-volume
+              mountPath: /home/node/app/.env
+              subPath: .env
+      volumes:
+        - name: nest-api-volume
+          configMap:
+            name: nest-api-config
+            items:
+              - key: env
+                path: .env
+
