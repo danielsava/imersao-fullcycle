@@ -60,7 +60,42 @@ Foi criado no Elastic, o Schema dos índices `route.new-direction` e `route.new-
 Todos eles foram executados através `Management` --> `DevTools` do `Kibana`. Segue abaixo os schemas criados
 
 
-    # Gera o índice 'route.new-direction'
+    # Índice Posição
+    PUT route.new-position
+    {
+      "mappings": {
+        "properties": {
+          "clientId": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"  
+              }
+            }
+          },
+          "routeId": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            }
+          },
+          "timestamp": {
+            "type": "date"
+          },
+          "finished": {
+            "type": "boolean"
+          },
+          "position": {
+            "type": "geo_point"
+          }
+        }
+      } 
+    }
+
+
+    # Índice Direção
     PUT route.new-direction 
     {
       "mappings": {
