@@ -123,6 +123,24 @@ Todos eles foram executados através `Management` --> `DevTools` do `Kibana`. Se
       } 
     }
 
+<br>
 
+E os comandos abaixo, para `limpar os índices` (delete from ...)
+
+    # route.new-position
+    POST route.new-position/_delete_by_query?conflicts=proceed
+    {
+      "query": {
+        "match_all": {}
+      }
+    }
+
+    # route.new-direction
+    POST route.new-direction/_delete_by_query?conflicts=proceed
+    {
+      "query": {
+        "match_all": {}
+      }
+    }
 
 
